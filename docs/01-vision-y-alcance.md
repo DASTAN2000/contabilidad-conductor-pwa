@@ -23,7 +23,7 @@
 El conductor trabaja con Uber y Didi al mismo tiempo, alternando entre ellas en una misma salida, y lleva sus cuentas a mano. Hoy:
 
 1. **Anota lo mismo tres veces.** Cada carrera en una hoja de carreras, los totales del día en la tabla "Contabilidad del Auto" y la semana en la hoja de liquidaciones.
-2. **No registra la plataforma de cada carrera.** Como alterna Uber y Didi, no puede saber cuánto le debe o le debe cada una.
+2. **No registra la plataforma de cada carrera.** Como alterna Uber y Didi, no puede saber cuánto le debe o cuánto debe a cada una.
 3. **El cruce de cuentas de las plataformas es difícil de seguir.** Cada plataforma lleva un saldo que sube con los viajes pagados con tarjeta (ya descontada la comisión) y baja con la comisión de los viajes en efectivo o Nequi. El conductor describe el resumen de las plataformas como "muy confuso".
 4. **La comisión es variable.** El conductor la estima entre 15 % y 20 %, pero cambia por viaje, así que no se puede calcular exacto con un porcentaje fijo.
 5. **La liquidación semanal es manual.** Usa un método de sobres (gastos y ganancias) que calcula a mano cada semana y cada mes.
