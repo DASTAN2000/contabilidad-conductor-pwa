@@ -10,8 +10,9 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 
 ## Estado actual
 
-- Fase: **requerimientos**. Documentos aprobados: `01-vision-y-alcance.md` (v0.2, pendiente aprobación del cliente).
-- Siguiente documento: `02-glosario-y-reglas-de-negocio.md`.
+- Fase: **requerimientos**. Documentos aprobados por el desarrollador (pendientes del cliente): `01-vision-y-alcance.md` (v0.2) y `02-glosario-y-reglas-de-negocio.md` (v0.2, con la decisión D-02 abierta).
+- Los términos y reglas de `02` (IDs RN-xx) son obligatorios: usa sus nombres exactos en código, interfaz y pruebas.
+- Siguiente documento: `03-historias-de-usuario.md`.
 - **No escribas código de la aplicación** hasta que Sergio lo apruebe explícitamente. La excepción prevista es la prueba de concepto de captura (página mínima para cronometrar el registro de una carrera), cuando él la pida.
 
 ## Decisiones tomadas

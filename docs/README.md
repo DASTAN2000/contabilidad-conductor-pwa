@@ -3,7 +3,7 @@
 | # | Documento | Versión | Estado |
 |---|---|---|---|
 | 01 | [Visión y alcance](01-vision-y-alcance.md) | 0.2 | Aprobado por el desarrollador; pendiente del cliente |
-| 02 | Glosario y reglas de negocio | — | Pendiente |
+| 02 | [Glosario y reglas de negocio](02-glosario-y-reglas-de-negocio.md) | 0.2 | Aprobado por el desarrollador; pendiente del cliente y de D-02 |
 | 03 | Historias de usuario y requerimientos no funcionales | — | Pendiente |
 | 04 | Modelo de datos | — | Pendiente |
 | 05 | Wireframes y flujo de pantallas | — | Pendiente |
