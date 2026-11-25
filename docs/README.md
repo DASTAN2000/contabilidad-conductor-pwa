@@ -2,9 +2,9 @@
 
 | # | Documento | Versión | Estado |
 |---|---|---|---|
-| 01 | [Visión y alcance](01-vision-y-alcance.md) | 0.2 | Aprobado por el desarrollador; pendiente del cliente |
-| 02 | [Glosario y reglas de negocio](02-glosario-y-reglas-de-negocio.md) | 0.2 | Aprobado por el desarrollador; pendiente del cliente y de D-02 |
-| 03 | Historias de usuario y requerimientos no funcionales | — | Pendiente |
+| 01 | [Visión y alcance](01-vision-y-alcance.md) | 0.3 | Aprobado |
+| 02 | [Glosario y reglas de negocio](02-glosario-y-reglas-de-negocio.md) | 0.3 | Aprobado |
+| 03 | [Historias de usuario y requerimientos no funcionales](03-historias-de-usuario.md) | 0.2 | Aprobado por el desarrollador |
 | 04 | Modelo de datos | — | Pendiente |
 | 05 | Wireframes y flujo de pantallas | — | Pendiente |
 | 06 | Decisiones de arquitectura (ADR) | — | Pendiente |

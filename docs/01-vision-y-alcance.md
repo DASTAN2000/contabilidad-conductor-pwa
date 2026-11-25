@@ -3,17 +3,18 @@
 | Campo | Valor |
 |---|---|
 | Proyecto | App de contabilidad para conductor de plataformas de transporte (nombre por definir) |
-| Versión | 0.2 |
-| Fecha | 2026-11-21 |
+| Versión | 0.3 |
+| Fecha | 2026-11-24 |
 | Autor | Sergio Alexander Sepúlveda Alvarado |
 | Cliente | Conductor de Uber y Didi (usuario único en la v1) |
-| Estado | Aprobada por el desarrollador; pendiente de aprobación del cliente |
+| Estado | Aprobada |
 
 ## Historial de versiones
 
 | Versión | Fecha | Cambios |
 |---|---|---|
 | 0.1 | 2026-11-18 | Primer borrador |
+| 0.3 | 2026-11-24 | Incorpora la ronda 3 de entrevista: el parqueadero es un apartado, el fondo del carro se acumula y se resuelven los supuestos S-06 y S-07. Aprobación del cliente |
 | 0.2 | 2026-11-21 | Incorpora las rondas 1 y 2 de entrevista y las fotos del cuaderno: registro por carrera, plataforma por carrera, saldo acumulado de las plataformas, método de sobres, dos ciclos semanales, categorías de gasto y supuestos pendientes |
 
 ---
@@ -61,8 +62,8 @@ El conductor trabaja con Uber y Didi al mismo tiempo, alternando entre ellas en 
 |---|---|
 | F-01 | **Turnos:** inicio y fin (hora tomada al tocar un botón, editable), km inicial (sugerido con el km final del turno anterior, editable por el uso personal del carro), km final y km recorrido calculado |
 | F-02 | **Carreras:** monto, plataforma (Uber o Didi) y medio de pago (tarjeta, efectivo o Nequi). La plataforma y el medio quedan preseleccionados con la última opción usada |
-| F-03 | **Gastos reales:** gasolina, parqueadero, lavado y mantenimiento realizado (ej. cambio de aceite), independientes del turno |
-| F-04 | **Apartados por turno:** valor apartado para mantenimiento, sugerido con el último valor y editable |
+| F-03 | **Gastos reales:** gasolina, parqueadero pagado, lavado y mantenimiento realizado (ej. cambio de aceite), independientes del turno |
+| F-04 | **Apartados por turno:** valores apartados para mantenimiento y para parqueadero, sugeridos con el último valor y editables. Lo apartado se acumula en el fondo del carro |
 | F-05 | **Captura rápida:** teclado numérico, botones grandes, dictado opcional con el micrófono del teclado y confirmación antes de guardar |
 
 ### Cálculos y liquidaciones
@@ -115,8 +116,8 @@ La arquitectura de la v1 debe permitir agregar la fase 2 sin reescribir la aplic
 | S-03 | Cada plataforma muestra su saldo acumulado en cualquier momento | Supuesto (Sergio) | Prueba de campo |
 | S-04 | En la lista de viajes, el valor principal de un viaje en efectivo es la ganancia neta del conductor | Supuesto (Sergio) | Prueba de campo |
 | S-05 | Didi muestra información equivalente a la de Uber | Supuesto (Sergio) | Prueba de campo |
-| S-06 | Días de trabajo que cubre el depósito del martes | Desconocido; se resuelve con el corte configurable | Prueba de campo |
-| S-07 | El parqueadero no se resta en el "total de semana a favor" de la liquidación actual, aunque es gasto real | Inconsistencia sin aclarar | Con el conductor, antes de cerrar las reglas de negocio |
+| S-06 | El depósito del martes cubre de lunes a domingo de la semana anterior | Confirmado por el cliente | — |
+| S-07 | El parqueadero diario es dinero apartado, porque no todos los días se paga parqueadero; por eso no se resta en la liquidación actual | Confirmado por el cliente | — |
 | S-08 | El conductor registra siempre detenido | Confirmado | — |
 
 ## 9. Riesgos principales
@@ -130,13 +131,11 @@ Lista inicial. La matriz completa (probabilidad, impacto y tratamiento según IS
 | R-03 | El saldo estimado difiere del real por la comisión variable | Conciliación con el saldo real (F-07) |
 | R-04 | Registrar toma más tiempo que el cuaderno y el conductor abandona la app | Prueba de concepto de captura antes del diseño final |
 | R-05 | Confusión entre "saldo a favor" (de la plataforma) y "total de semana a favor" (sobrante del sobre de gastos) | Glosario y nombres distintos en la interfaz |
-| R-06 | Supuestos S-03 a S-07 resultan falsos | Validarlos en la prueba de campo; los valores afectados son configurables |
+| R-06 | Supuestos S-03 a S-05 resultan falsos | Validarlos en la prueba de campo; los valores afectados son configurables |
 
 ## 10. Preguntas abiertas
 
-1. ¿Qué días de trabajo cubre el depósito del martes? (S-06)
-2. ¿Por qué el parqueadero no se resta en la liquidación? (S-07)
-3. Nombre del producto.
+1. Nombre del producto.
 
 ## 11. Documentos relacionados
 
@@ -147,7 +146,7 @@ Lista inicial. La matriz completa (probabilidad, impacto y tratamiento según IS
 
 | Rol | Nombre | Fecha | Medio |
 |---|---|---|---|
-| Cliente | | | |
+| Cliente | Conductor | 2026-11-23 | WhatsApp: aprobó el resumen del alcance |
 | Desarrollador | Sergio Alexander Sepúlveda Alvarado | 2026-11-21 | Revisión del documento |
 
 ## Referencias
