@@ -39,6 +39,7 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 - **Nunca** subir al repositorio datos reales del cliente (montos, capturas, fotos del cuaderno, nombres). Los casos de prueba usan datos ficticios o anonimizados.
 - No agregar dependencias de terceros sin justificarlas. Revisar el código de cualquier plugin o paquete de terceros antes de usarlo.
 - CSP en `meta`, sin scripts en línea ni `eval`; insertar datos del usuario solo con `textContent`, nunca `innerHTML` (ADR-005).
+- Nunca fusionar pull requests, nunca hacer push a main y nunca instalar programas sin que Sergio lo pida explícitamente.
 
 ## Convenciones
 
