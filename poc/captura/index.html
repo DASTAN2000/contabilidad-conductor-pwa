@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#ffffff">
+  <title>Prueba de captura</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="encabezado">
+    <h1>Prueba de captura</h1>
+    <p class="nota">Prueba de concepto. Los datos solo viven en esta pestaña y se borran al recargar.</p>
+  </header>
+
+  <main>
+    <section class="saldos" aria-label="Saldo estimado por plataforma">
+      <div class="saldo">
+        <span class="etiqueta">Estimado</span>
+        <span id="saldo-uber" class="valor-saldo">Uber: sin saldo pendiente</span>
+      </div>
+      <div class="saldo">
+        <span class="etiqueta">Estimado</span>
+        <span id="saldo-didi" class="valor-saldo">Didi: sin saldo pendiente</span>
+      </div>
+    </section>
+
+    <button id="abrir-registro" type="button" class="boton boton-principal boton-grande">Registrar carrera</button>
+
+    <form id="registro" class="registro" hidden novalidate>
+      <label for="monto" class="etiqueta-campo">Monto</label>
+      <input id="monto" name="monto" type="text" inputmode="numeric" pattern="[0-9]*"
+             autocomplete="off" enterkeyhint="done" maxlength="11" class="campo-monto" placeholder="0">
+
+      <fieldset class="grupo">
+        <legend>Plataforma</legend>
+        <div class="opciones" data-grupo="plataforma">
+          <button type="button" class="boton opcion" data-valor="uber" aria-pressed="false">Uber</button>
+          <button type="button" class="boton opcion" data-valor="didi" aria-pressed="false">Didi</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Medio de pago</legend>
+        <div class="opciones" data-grupo="medioDePago">
+          <button type="button" class="boton opcion" data-valor="tarjeta" aria-pressed="false">Tarjeta</button>
+          <button type="button" class="boton opcion" data-valor="efectivo" aria-pressed="false">Efectivo</button>
+          <button type="button" class="boton opcion" data-valor="nequi" aria-pressed="false">Nequi</button>
+        </div>
+      </fieldset>
+
+      <p id="error-monto" class="error" role="alert"></p>
+
+      <div class="acciones">
+        <button id="cancelar" type="button" class="boton boton-secundario">Cancelar</button>
+        <button type="submit" class="boton boton-principal">Guardar</button>
+      </div>
+    </form>
+
+    <p id="confirmacion" class="confirmacion" role="status" aria-live="polite" hidden></p>
+
+    <section class="resultados" aria-labelledby="titulo-resultados">
+      <h2 id="titulo-resultados">Tiempos de registro</h2>
+      <dl class="resumen">
+        <div><dt>Sin cambiar plataforma ni medio</dt><dd id="resumen-sin-cambios">Sin carreras</dd></div>
+        <div><dt>Todas las carreras</dt><dd id="resumen-todas">Sin carreras</dd></div>
+      </dl>
+
+      <ol id="lista-carreras" class="lista" reversed></ol>
+
+      <button id="copiar" type="button" class="boton boton-secundario" disabled>Copiar resultados</button>
+      <p id="estado-copia" class="nota" role="status" aria-live="polite"></p>
+      <textarea id="texto-copia" class="texto-copia" readonly hidden aria-label="Resultados para copiar"></textarea>
+    </section>
+  </main>
+</body>
+</html>
