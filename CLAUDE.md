@@ -12,7 +12,8 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 
 - Fase: **requerimientos → arquitectura**. Aprobados: `01-vision-y-alcance.md` (v0.3), `02-glosario-y-reglas-de-negocio.md` (v0.3) y `03-historias-de-usuario.md` (v0.2).
 - Los términos y reglas de `02` (IDs RN-xx) son obligatorios: usa sus nombres exactos en código, interfaz y pruebas.
-- Siguiente: `06-decisiones-de-arquitectura.md` y luego la prueba de concepto (incremento 0 del documento 03). Los documentos 04, 05, 07 y 08 van después de la prueba de concepto.
+- Arquitectura: `06-decisiones-de-arquitectura.md` (ADR-001 a ADR-005). Respétala; cambiarla exige un ADR nuevo.
+- Siguiente: la prueba de concepto (incremento 0 del documento 03). Los documentos 04, 05, 07 y 08 van después de la prueba de concepto.
 - **No escribas código de la aplicación** hasta que Sergio lo apruebe explícitamente. La excepción prevista es la prueba de concepto de captura (página mínima para cronometrar el registro de una carrera), cuando él la pida.
 
 ## Decisiones tomadas
@@ -26,13 +27,18 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 - Captura rápida con teclado numérico; el dictado es opcional. Metas: 10 s por carrera y 30 s para cerrar un turno.
 - Tema claro por defecto (preferencia del cliente).
 - El parqueadero y el mantenimiento son apartados que alimentan el fondo del carro, que se acumula (documento 02, RN-20 y RN-21).
-- Pendiente de decisión (ADR): stack, almacenamiento local y uso de Tailwind. El CDN de Tailwind (Play CDN) no es apto para producción ni para uso offline sin precarga.
+- JavaScript puro con módulos ES, sin framework ni compilación; capas `js/dominio` (reglas puras), `js/datos` (IndexedDB) y `js/ui` (ADR-001).
+- IndexedDB nativo solo a través de `js/datos`; montos como enteros COP; IDs con `crypto.randomUUID()` (ADR-002).
+- CSS propio con variables; sin Tailwind ni fuentes externas (ADR-003).
+- Service worker propio, caché versionada (ADR-004).
+- Pruebas de `js/dominio` con `node --test`, sin paquetes.
 
 ## Seguridad
 
 - Alinear el diseño con OWASP ASVS nivel 1 (requisitos aplicables), gestión de riesgos según ISO 31000 y controles de referencia del Anexo A de ISO/IEC 27001. Se dice "alineado con", nunca "cumple" o "certificado".
 - **Nunca** subir al repositorio datos reales del cliente (montos, capturas, fotos del cuaderno, nombres). Los casos de prueba usan datos ficticios o anonimizados.
 - No agregar dependencias de terceros sin justificarlas. Revisar el código de cualquier plugin o paquete de terceros antes de usarlo.
+- CSP en `meta`, sin scripts en línea ni `eval`; insertar datos del usuario solo con `textContent`, nunca `innerHTML` (ADR-005).
 
 ## Convenciones
 

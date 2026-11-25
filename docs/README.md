@@ -7,7 +7,7 @@
 | 03 | [Historias de usuario y requerimientos no funcionales](03-historias-de-usuario.md) | 0.2 | Aprobado por el desarrollador |
 | 04 | Modelo de datos | — | Pendiente |
 | 05 | Wireframes y flujo de pantallas | — | Pendiente |
-| 06 | Decisiones de arquitectura (ADR) | — | Pendiente |
+| 06 | [Decisiones de arquitectura (ADR)](06-decisiones-de-arquitectura.md) | 0.1 | En revisión |
 | 07 | Matriz de riesgos (ISO 31000) | — | Pendiente |
 | 08 | Plan de pruebas | — | Pendiente |
 
