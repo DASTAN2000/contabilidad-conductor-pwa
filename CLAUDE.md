@@ -10,9 +10,9 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 
 ## Estado actual
 
-- Fase: **requerimientos**. Documentos aprobados por el desarrollador (pendientes del cliente): `01-vision-y-alcance.md` (v0.2) y `02-glosario-y-reglas-de-negocio.md` (v0.2, con la decisión D-02 abierta).
+- Fase: **requerimientos → arquitectura**. Aprobados: `01-vision-y-alcance.md` (v0.3), `02-glosario-y-reglas-de-negocio.md` (v0.3) y `03-historias-de-usuario.md` (v0.2).
 - Los términos y reglas de `02` (IDs RN-xx) son obligatorios: usa sus nombres exactos en código, interfaz y pruebas.
-- Siguiente documento: `03-historias-de-usuario.md`.
+- Siguiente: `06-decisiones-de-arquitectura.md` y luego la prueba de concepto (incremento 0 del documento 03). Los documentos 04, 05, 07 y 08 van después de la prueba de concepto.
 - **No escribas código de la aplicación** hasta que Sergio lo apruebe explícitamente. La excepción prevista es la prueba de concepto de captura (página mínima para cronometrar el registro de una carrera), cuando él la pida.
 
 ## Decisiones tomadas
@@ -24,6 +24,8 @@ La fuente de verdad de los requerimientos es `docs/`. Lee `docs/01-vision-y-alca
 - La comisión es variable (el cliente la estima entre 15 % y 20 %). Nunca usar un porcentaje fijo como verdad: el saldo de cada plataforma se estima y se concilia con el saldo real que muestra la plataforma.
 - Dos ciclos independientes y configurables: liquidación personal (lunes a domingo por defecto) y corte de plataforma (martes por defecto).
 - Captura rápida con teclado numérico; el dictado es opcional. Metas: 10 s por carrera y 30 s para cerrar un turno.
+- Tema claro por defecto (preferencia del cliente).
+- El parqueadero y el mantenimiento son apartados que alimentan el fondo del carro, que se acumula (documento 02, RN-20 y RN-21).
 - Pendiente de decisión (ADR): stack, almacenamiento local y uso de Tailwind. El CDN de Tailwind (Play CDN) no es apto para producción ni para uso offline sin precarga.
 
 ## Seguridad

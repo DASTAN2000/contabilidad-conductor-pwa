@@ -3,18 +3,19 @@
 | Campo | Valor |
 |---|---|
 | Proyecto | App de contabilidad para conductor de plataformas de transporte (nombre por definir) |
-| Versión | 0.2 |
-| Fecha | 2026-11-21 |
+| Versión | 0.3 |
+| Fecha | 2026-11-24 |
 | Autor | Sergio Alexander Sepúlveda Alvarado |
-| Estado | Aprobada por el desarrollador; pendiente de aprobación del cliente y de la decisión D-02 |
-| Documento base | [01 — Visión y alcance](01-vision-y-alcance.md) v0.2 |
+| Estado | Aprobada |
+| Documento base | [01 — Visión y alcance](01-vision-y-alcance.md) v0.3 |
 
 ## Historial de versiones
 
 | Versión | Fecha | Cambios |
 |---|---|---|
 | 0.1 | 2026-11-21 | Primer borrador |
-| 0.2 | 2026-11-21 | Decisiones D-01, D-03 y D-04 tomadas. El fondo de mantenimiento se liquida cada mes (S-10) |
+| 0.2 | 2026-11-21 | Decisiones D-01, D-03 y D-04 tomadas. El fondo del carro se liquida cada mes (S-10) |
+| 0.3 | 2026-11-24 | Ronda 3 de entrevista: el parqueadero pasa a ser apartado (D-02); el fondo del carro se acumula (S-10 era falso); S-09 confirmado; la utilidad del turno descuenta los apartados; ejemplo recalculado |
 
 ---
 
@@ -69,10 +70,10 @@ La columna "En el cuaderno" indica cómo llama hoy el conductor a ese concepto, 
 
 | Término | Definición | En el cuaderno |
 |---|---|---|
-| Gasto operativo | Gasto real del día a día que se paga al momento: gasolina y parqueadero | Gasolina, parqueadero |
-| Gasto de fondo | Gasto real que se paga con el dinero apartado: lavado y mantenimiento realizado (ej. cambio de aceite) | "Menos: lavado, cambio de aceite…" |
-| Apartado | Dinero que el conductor separa en un turno para mantenimiento futuro. No es un gasto: es dinero reservado | Columna "Mantenimiento" de la tabla diaria |
-| Fondo de mantenimiento | Apartados del mes menos gastos de fondo del mes. Lo que sobra al cerrar el mes pasa a las ganancias del mes | — |
+| Gasto operativo | Gasto real que se paga al momento con el dinero del turno: la gasolina | Gasolina |
+| Gasto de fondo | Gasto real que se paga con el dinero apartado: parqueadero pagado, lavado y mantenimiento realizado (ej. cambio de aceite) | "Menos: lavado, cambio de aceite…" |
+| Apartado | Dinero que el conductor separa en un turno para mantenimiento o para parqueadero. No es un gasto: es dinero reservado | Columnas "Mantenimiento" y "Parqueadero" de la tabla diaria |
+| Fondo del carro | Suma de todos los apartados menos todos los gastos de fondo. Se acumula de una semana y un mes a otro para cubrir lo que necesite el carro | — |
 | Semana de liquidación | Periodo personal de cierre del conductor (lunes a domingo por defecto). Es independiente del corte de las plataformas | "Liquidación del … al …" |
 | Sobre de gastos | Gastos operativos más apartados de una semana de liquidación | "Parqueadero, mantenimiento y gasolina" |
 | Sobre de ganancias | Lo que queda para el conductor en la semana después de separar el sobre de gastos | "Sobre de ganancias" |
@@ -121,15 +122,15 @@ Cada regla indica la funcionalidad del documento 01 que la usa.
 | ID | Regla | Funcionalidad |
 |---|---|---|
 | RN-18 | Un gasto real tiene fecha, categoría y monto (entero mayor que 0). Puede asociarse a un turno, pero no es obligatorio | F-03 |
-| RN-19 | Categorías de gasto: gasolina y parqueadero son gastos operativos; lavado y mantenimiento realizado son gastos de fondo | F-03 |
-| RN-20 | Un apartado se registra al cerrar un turno. Se sugiere con el valor del último apartado, es editable y puede ser 0 | F-04 |
-| RN-21 | Fondo de mantenimiento del mes = apartados del mes − gastos de fondo del mes. No se acumula de un mes a otro (S-10). Puede quedar negativo; en ese caso el sistema lo advierte | F-04, F-10 |
+| RN-19 | Categorías de gasto: la gasolina es gasto operativo; parqueadero pagado, lavado y mantenimiento realizado son gastos de fondo | F-03 |
+| RN-20 | Al cerrar un turno se registran dos apartados: mantenimiento y parqueadero. Cada uno se sugiere con su último valor, es editable y puede ser 0 | F-04 |
+| RN-21 | Fondo del carro = suma de todos los apartados − suma de todos los gastos de fondo, desde el primer registro. Se acumula y no se reinicia al cambiar de semana o de mes. Puede quedar negativo; en ese caso el sistema lo advierte | F-04, F-09, F-10 |
 
 ### 3.5 Indicadores
 
 | ID | Regla | Funcionalidad |
 |---|---|---|
-| RN-22 | Utilidad de un turno = ingreso neto del turno − gastos operativos asociados al turno | F-11 |
+| RN-22 | Utilidad de un turno = ingreso neto del turno − gastos operativos asociados al turno − apartados del turno. Es lo que el turno aporta al sobre de ganancias | F-11 |
 | RN-23 | Utilidad por hora = utilidad del turno ÷ horas del turno. Utilidad por km = utilidad del turno ÷ km recorrido. Si el divisor es 0, el indicador no se muestra | F-11 |
 
 ### 3.6 Liquidaciones
@@ -140,7 +141,7 @@ Cada regla indica la funcionalidad del documento 01 que la usa.
 | RN-25 | Sobre de gastos de la semana = gastos operativos de la semana + apartados de la semana | F-09 |
 | RN-26 | Sobre de ganancias de la semana = ingreso neto de la semana − sobre de gastos (D-01). Como referencia, el sistema muestra también el cálculo del cuaderno: total trabajado − sobre de gastos | F-09 |
 | RN-27 | Sobrante del sobre de gastos = sobre de gastos − gastos operativos − gastos de fondo de la semana. Equivale a los apartados de la semana menos los gastos de fondo de la semana (ver D-02) | F-09 |
-| RN-28 | La liquidación mensual suma los turnos y gastos cuya fecha cae dentro del mes calendario (D-04). Al cerrar el mes, el fondo de mantenimiento del mes se suma a las ganancias del mes si es positivo, o se resta si es negativo (RN-21) | F-10 |
+| RN-28 | La liquidación mensual suma los turnos y gastos cuya fecha cae dentro del mes calendario (D-04) y muestra el saldo del fondo del carro al cierre del mes | F-10 |
 
 ### 3.7 Datos
 
@@ -163,9 +164,10 @@ Datos **ficticios**. Una semana con un solo turno y comisión del 20 % para amba
 | Carreras Didi con tarjeta | 30.000 |
 | Carreras Didi por Nequi | 20.000 |
 | Gasolina | 30.000 |
-| Parqueadero | 10.000 |
+| Apartado de parqueadero | 10.000 |
 | Apartado de mantenimiento | 30.000 |
-| Lavado (pagado en la semana) | 15.000 |
+| Parqueadero pagado en la semana | 6.000 |
+| Lavado pagado en la semana | 15.000 |
 
 **Cálculos**
 
@@ -177,11 +179,11 @@ Datos **ficticios**. Una semana con un solo turno y comisión del 20 % para amba
 | Ingreso neto | Glosario | 150.000 − 8.000 − 4.000 | 138.000 |
 | Saldo estimado Uber | RN-12 | 60.000 − 8.000 | 52.000 → "Uber te debe 52.000" |
 | Saldo estimado Didi | RN-12 | 30.000 − 4.000 | 26.000 → "Didi te debe 26.000" |
-| Utilidad del turno | RN-22 | 138.000 − 30.000 − 10.000 | 98.000 |
+| Utilidad del turno | RN-22 | 138.000 − 30.000 − 10.000 − 30.000 | 68.000 |
 | Sobre de gastos | RN-25 | 30.000 + 10.000 + 30.000 | 70.000 |
 | Sobre de ganancias | RN-26 | 138.000 − 70.000 | 68.000 |
-| Sobrante del sobre de gastos | RN-27 | 70.000 − 40.000 − 15.000 | 15.000 |
-| Fondo de mantenimiento | RN-21 | 30.000 − 15.000 | 15.000 |
+| Sobrante del sobre de gastos | RN-27 | 70.000 − 30.000 − 6.000 − 15.000 | 19.000 |
+| Fondo del carro | RN-21 | 10.000 + 30.000 − 6.000 − 15.000 | 19.000 |
 
 Con el método actual del cuaderno, el sobre de ganancias sería 150.000 − 70.000 = **80.000**. La diferencia de 12.000 son las comisiones de las carreras en efectivo y Nequi, que el conductor le debe a las plataformas. Ver D-01.
 
@@ -190,7 +192,7 @@ Con el método actual del cuaderno, el sobre de ganancias sería 150.000 − 70.
 | ID | Decisión | Opciones | Recomendación |
 |---|---|---|---|
 | D-01 | ¿El sobre de ganancias se calcula sobre el total trabajado (como el cuaderno) o sobre el ingreso neto? | A) Total trabajado: coincide con el cuaderno, pero infla la ganancia. B) Ingreso neto: refleja lo que de verdad queda | **Decidida: B**, mostrando también el cálculo del cuaderno como referencia (2026-11-21) |
-| D-02 | El parqueadero, ¿sale del sobre de gastos? | A) Sí, como gasto operativo (RN-27). B) No, como hoy en el cuaderno | **A**, pendiente de que el conductor explique por qué hoy no lo resta (S-07) |
+| D-02 | ¿Cómo se trata el parqueadero? | A) Gasto operativo diario. B) Apartado, y lo que se paga sale del fondo del carro | **Decidida: B**. El cliente aparta el parqueadero porque no lo paga todos los días (2026-11-24) |
 | D-03 | Porcentaje de comisión por defecto | A) 15 %. B) 17,5 % (punto medio). C) 20 % | **Decidida: C**. Es mejor que el corte muestre más dinero del estimado que menos (2026-11-21) |
 | D-04 | Liquidación mensual cuando una semana cruza el cambio de mes | A) Por fecha de cada turno (RN-28). B) Por semanas completas, asignando la semana al mes donde empieza | **Decidida: A** (2026-11-21) |
 
@@ -200,17 +202,16 @@ Se mantienen los supuestos S-01 a S-08 del documento 01. Se agregan:
 
 | ID | Supuesto | Cómo se valida |
 |---|---|---|
-| S-09 | Las plataformas cobran comisión sobre los pagos por Nequi igual que sobre el efectivo | Prueba de campo |
-| S-10 | Lo que sobra del dinero apartado para mantenimiento no se guarda para el mes siguiente: al cerrar el mes pasa a las ganancias del mes | Supuesto (Sergio); pregunta al conductor |
+| S-09 | Las plataformas cobran comisión sobre los pagos por Nequi igual que sobre el efectivo | Confirmado por el cliente |
+| S-10 | ~~El sobrante del fondo pasa a las ganancias del mes~~. **Falso:** el cliente guarda el sobrante para lo que necesite el carro (RN-21) | Respondido por el cliente |
 
 ## 7. Preguntas para el cliente
 
-1. Cuando al final del mes le sobra plata de lo que apartó para mantenimiento, ¿qué hace con ella: la guarda para el mes siguiente o la cuenta como ganancia? (S-10)
-2. Al hacer la liquidación de la semana, ¿cómo maneja el parqueadero: lo descuenta de la plata de gastos o lo paga de otra forma? (S-07, D-02)
+Ninguna pendiente.
 
 ## 8. Aprobación
 
 | Rol | Nombre | Fecha | Medio |
 |---|---|---|---|
-| Cliente | | | |
+| Cliente | Conductor | 2026-11-23 | Reglas validadas en las rondas de entrevista 1 a 3 |
 | Desarrollador | Sergio Alexander Sepúlveda Alvarado | 2026-11-21 | Revisión del documento |
