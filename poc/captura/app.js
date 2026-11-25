@@ -57,13 +57,17 @@ function abrirRegistro() {
   pintarOpciones();
   ui.abrirRegistro.hidden = true;
   ui.registro.hidden = false;
+  // Solo el formulario, arriba, para que quede completo encima del teclado.
+  document.body.classList.add("registrando");
+  window.scrollTo(0, 0);
   // Criterio 1: el foco se da dentro del mismo toque para que Chrome en
   // Android abra el teclado numérico sin tocar el campo.
-  ui.monto.focus();
+  ui.monto.focus({ preventScroll: true });
 }
 
 function cerrarRegistro() {
   estado.inicio = null;
+  document.body.classList.remove("registrando");
   ui.registro.hidden = true;
   ui.abrirRegistro.hidden = false;
   ui.abrirRegistro.focus({ preventScroll: true });

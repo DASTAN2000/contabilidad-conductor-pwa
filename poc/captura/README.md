@@ -8,7 +8,7 @@ Incremento 0 del [documento 03](../../docs/03-historias-de-usuario.md#4-plan-de-
 
 | HU-04 | Cómo se cumple |
 |---|---|
-| Criterio 1 | Al tocar "Registrar carrera", el campo de monto recibe el foco y se abre el teclado numérico |
+| Criterio 1 | Al tocar "Registrar carrera", el campo de monto recibe el foco y se abre el teclado numérico. Mientras el registro está abierto se ocultan el encabezado, los saldos y los resultados, para que el formulario completo quede encima del teclado sin desplazar |
 | Criterio 2 | La plataforma y el medio de pago quedan preseleccionados con los de la última carrera (RN-07). La primera carrera parte de Uber y tarjeta |
 | Criterio 3 | Plataforma y medio de pago se cambian con un toque |
 | Criterio 4 | Al guardar aparece una confirmación con monto, plataforma y medio de pago, y se actualiza el saldo estimado de esa plataforma (RN-11, RN-12, 20 % de comisión) |
