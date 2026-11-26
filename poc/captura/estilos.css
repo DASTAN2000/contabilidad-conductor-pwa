@@ -108,12 +108,21 @@ h2 { font-size: 1.15rem; margin: 0 0 var(--espacio-2); }
 
 .boton-grande { min-height: 72px; font-size: 1.25rem; }
 
-/* Formulario de registro */
+/* Modo registro: mientras el formulario está abierto se oculta todo lo demás
+   y el formulario queda arriba, para que se vea completo encima del teclado. */
+body.registrando { padding: var(--espacio-2); }
+
+body.registrando .encabezado,
+body.registrando .saldos,
+body.registrando .resultados,
+body.registrando .confirmacion { display: none; }
+
+/* Formulario de registro, compacto para caber encima del teclado */
 .registro {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-3);
-  padding: var(--espacio-3);
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-3) var(--espacio-3);
   border: 2px solid var(--color-primario);
   border-radius: var(--radio);
 }
@@ -122,7 +131,7 @@ h2 { font-size: 1.15rem; margin: 0 0 var(--espacio-2); }
 
 .campo-monto {
   width: 100%;
-  min-height: 64px;
+  min-height: 56px;
   padding: var(--espacio-2) var(--espacio-3);
   border: 2px solid var(--color-borde);
   border-radius: var(--radio);
@@ -136,7 +145,18 @@ h2 { font-size: 1.15rem; margin: 0 0 var(--espacio-2); }
 .campo-monto:focus { outline: 3px solid var(--color-primario); outline-offset: 2px; }
 
 .grupo { margin: 0; padding: 0; border: 0; }
-.grupo legend { padding: 0; margin-bottom: var(--espacio-2); font-weight: 600; }
+
+/* Los títulos "Plataforma" y "Medio de pago" solo se anuncian a lectores de
+   pantalla: los botones ya se explican solos y así el formulario es más bajo. */
+.grupo legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .opciones {
   display: grid;
@@ -157,7 +177,8 @@ h2 { font-size: 1.15rem; margin: 0 0 var(--espacio-2); }
   gap: var(--espacio-2);
 }
 
-.error { margin: 0; min-height: 1.4em; color: var(--color-error); font-weight: 600; }
+.error { margin: 0; color: var(--color-error); font-weight: 600; }
+.error:empty { display: none; }
 
 /* Confirmación (HU-04 criterio 4) */
 .confirmacion {
